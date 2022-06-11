@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Cookies from 'cookies';
-const Home = ({ sid, user }) => {
+
+const User = ({ sid }) => {
 	if (sid === null) {
 		return (
 			<div>
@@ -8,18 +8,16 @@ const Home = ({ sid, user }) => {
 			</div>
 		);
 	} else {
-		return <div>hi {user}</div>;
+		return <div>user profile soon</div>;
 	}
 };
 
 export async function getServerSideProps(context) {
 	const cookies = new Cookies(context.req, context.res);
 	const sid = cookies.get('connect.sid') ? cookies.get('connect.sid') : null;
-	const user = cookies.get('user') ? cookies.get('user') : null;
 	return {
 		props: {
-			sid,
-			user
+			sid
 		}
 	};
 }

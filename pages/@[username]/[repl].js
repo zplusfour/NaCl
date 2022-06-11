@@ -1,6 +1,9 @@
+// import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Cookies from 'cookies';
-const Home = ({ sid, user }) => {
+
+const Repl = ({ sid }) => {
+	// const router = useRouter();
 	if (sid === null) {
 		return (
 			<div>
@@ -8,18 +11,17 @@ const Home = ({ sid, user }) => {
 			</div>
 		);
 	} else {
-		return <div>hi {user}</div>;
+		// const { username, repl } = router.query;
+		return <div>soon repl editor</div>;
 	}
 };
 
 export async function getServerSideProps(context) {
 	const cookies = new Cookies(context.req, context.res);
 	const sid = cookies.get('connect.sid') ? cookies.get('connect.sid') : null;
-	const user = cookies.get('user') ? cookies.get('user') : null;
 	return {
 		props: {
-			sid,
-			user
+			sid
 		}
 	};
 }
