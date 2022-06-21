@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import Cookies from 'cookies';
 import { useEffect, useState } from 'react';
-import Replcss from './replcss';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 const Login = ({ sid, user }) => {
@@ -12,16 +10,10 @@ const Login = ({ sid, user }) => {
 		}
 	}, [token]);
 	if (sid) {
-		return (
-			<div>
-				<Replcss />
-				you are logged in, {user}
-			</div>
-		);
+		return <div>you are logged in, {user}</div>;
 	} else {
 		return (
 			<div style={{ textAlign: 'center' }}>
-				<Replcss />
 				<form
 					action="/api/login"
 					method="POST"
@@ -36,7 +28,6 @@ const Login = ({ sid, user }) => {
 					<br />
 					<br />
 
-					{/* 473079ba-e99f-4e25-a635-e9b661c7dd3e */}
 					<HCaptcha
 						sitekey="473079ba-e99f-4e25-a635-e9b661c7dd3e"
 						onVerify={(token) => {
@@ -46,7 +37,9 @@ const Login = ({ sid, user }) => {
 					/>
 					<input value={token} style={{ display: 'none' }} id="captcha" name="captcha" />
 					<br />
-					<input type="submit" value="Login" style={{ cursor: 'pointer' }} />
+					<button type="submit" style={{ cursor: 'pointer' }}>
+						Login
+					</button>
 				</form>
 			</div>
 		);
