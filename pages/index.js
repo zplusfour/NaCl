@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import Cookies from 'cookies';
 import fetch from 'node-fetch';
-// import dotenv from 'dotenv';
 
-// dotenv.config();
-
-const Home = ({ sid, user, message, latestRepls }) => {
+const Home = ({ sid, user, latestRepls }) => {
 	if (!sid) {
 		return (
 			<div>
@@ -15,12 +12,21 @@ const Home = ({ sid, user, message, latestRepls }) => {
 	} else {
 		return (
 			<div>
-				<h1>Welcome back, {user}!</h1>
-				<form action="/api/logout" method="POST">
-					<button type="submit" className="btn-negative">
-						Log out
-					</button>
-				</form>
+				<div className="user-info">
+					<h1>Welcome back, {user}!</h1>
+					<div className="right">
+						<form action="/api/logout" method="POST">
+							<button type="submit" className="btn-negative">
+								Log out
+							</button>
+						</form>
+						<Link href="/account/settings">
+							<button style={{ marginLeft: `${String(10)}px` }} className="btn-colored">
+								Settings
+							</button>
+						</Link>
+					</div>
+				</div>
 				<br />
 				<h3>Your latest repls: </h3>
 				<br />
@@ -28,14 +34,33 @@ const Home = ({ sid, user, message, latestRepls }) => {
 					{latestRepls.map((repl) => {
 						return (
 							<div key={repl} className="replit-box">
-								<p>Title: {repl.title}</p>
-								<p>Description: {repl.description ? repl.description : 'No description'}</p>
+								<p>
+									<b>@{user}</b> <span style={{ color: 'gray' }}>/</span> <b>{repl.title}</b>
+								</p>
+								<p>{repl.description ? repl.description : 'No description'}</p>
 								<button className="btn-colored">Open editor</button>&nbsp;&nbsp;
 								<button className="btn-negative">Delete</button>
 							</div>
 						);
 					})}
 				</div>
+				<script
+					src="https://unpkg.com/react/umd/react.production.min.js"
+					async
+					crossOrigin=""
+				></script>
+
+				<script
+					src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+					async
+					crossOrigin=""
+				></script>
+
+				<script
+					src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+					async
+					crossOrigin=""
+				></script>
 			</div>
 		);
 	}

@@ -1,9 +1,10 @@
 import Cookies from 'cookies';
-import Gql from '../utils/gql';
+import Gql from '../../utils/gql';
 
 export default async function handler(req, res) {
 	const cookies = new Cookies(req, res);
 	const sid = cookies.get('connect.sid') ? cookies.get('connect.sid') : null;
+	const { user } = req.query;
 	// const user = cookies.get('user') ? cookies.get('user') : null;
 
 	if (sid === null) {
@@ -11,12 +12,19 @@ export default async function handler(req, res) {
 	} else {
 		const gql = new Gql(sid);
 		const query = await gql.raw({
-			variables: { count: 3 },
-			query: `query recentRepls($count: Int!) { recentRepls(count: $count) { title description language } }
-			`
+			query: `
+        query {
+          userByUsername(username: "${user}") {
+            id username firstName lastName bio isVerified url image karma
+          }
+        }
+      `
 		});
-		const jsonRet = query.data.recentRepls;
 
-		res.status(200).json(jsonRet);
+		if (query.errors) {
+			res.json(query);
+		} else {
+			res.json(query.data.userByUsername);
+		}
 	}
 }

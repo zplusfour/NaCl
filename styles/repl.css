@@ -172,6 +172,7 @@ body {
 	color: var(--foreground-default);
 	font-family: var(--font-family-default);
 	font-size: 16px;
+  padding: 25px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -285,12 +286,32 @@ button:active {
 	border-color: var(--accent-primary-default);
 }
 
-.replit-box {
+.backup-replit-box {
 	display: block;
 	padding: 8px;
 	background: var(--background-default);
 	border: 1px solid var(--interactive-border);
 	border-radius: var(--border-radius-8);
+}
+
+.replit-box {
+  width: 25em;
+  padding: 8px;
+  border: 1px solid #5F677A;
+  margin-right: 8px;
+  -webkit-box-align: stretch;
+  align-items: stretch;
+  box-sizing: border-box;
+  display: grid;
+  outline: none;
+  min-height: 0px;
+  min-width: 0px;
+  background-color: var(--interactive-background);
+  border-width: 1px;
+  border-radius: var(--border-radius-8);
+  padding: var(--space-8);
+  position: relative;
+  flex-direction: column;
 }
 
 .replit-txlogo {
@@ -326,4 +347,32 @@ select:active {
 }
 .feather {
 	color: var(--foreground-default);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+}
+
+.user-info .right {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
