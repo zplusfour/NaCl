@@ -1,4 +1,6 @@
 import fetch from 'node-fetch';
+
+// damn this is so bad
 export default class Gql {
 	constructor(sid) {
 		this.sid = sid;

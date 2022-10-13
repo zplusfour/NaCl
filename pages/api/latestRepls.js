@@ -4,7 +4,6 @@ import Gql from '../utils/gql';
 export default async function handler(req, res) {
 	const cookies = new Cookies(req, res);
 	const sid = cookies.get('connect.sid') ? cookies.get('connect.sid') : null;
-	// const user = cookies.get('user') ? cookies.get('user') : null;
 
 	if (sid === null) {
 		res.status(401).json({ error: 'Please login first' });
