@@ -1,14 +1,18 @@
 import Link from 'next/link';
 import Cookies from 'cookies';
 import fetch from 'node-fetch';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Home = ({ sid, user, latestRepls }) => {
+	const router = useRouter();
+	useEffect(() => {
+		if (!sid) {
+			router.push('/login');
+		}
+	});
 	if (!sid) {
-		return (
-			<div>
-				please <Link href="/login">login</Link>
-			</div>
-		);
+		// we'll add a homepage later
 	} else {
 		return (
 			<div>
